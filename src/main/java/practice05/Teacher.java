@@ -6,9 +6,11 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Teacher extends Student {
+public class Teacher extends Person {
+    private Integer klass = null;
     public Teacher(String name, int age,int klass) {
-        super(name, age,klass);
+        super(name, age);
+        this.klass = klass;
     }
     public Teacher(String name, int age) {
         super(name, age);
@@ -16,13 +18,9 @@ public class Teacher extends Student {
 
     @Override
     public String introduce() {
-        return this.getKlass()!=0?
-                String.format("My name is %s. I am %d years old. I am a Teacher. I teach Class %d.",
-                        this.getName(),
-                        this.getAge(),
-                        this.getKlass()):
-                String.format("My name is %s. I am %d years old. I am a Teacher. I teach No Class.",
-                        this.getName(),
-                        this.getAge());
+        return this.getKlass() != null ?
+                super.introduce() + String.format(" I am a Teacher. I teach Class %d.",
+                        this.getKlass()) :
+                super.introduce() + " I am a Teacher. I teach No Class.";
     }
 }
