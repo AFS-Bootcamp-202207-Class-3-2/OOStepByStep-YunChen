@@ -36,9 +36,10 @@ public class Teacher extends Person {
                         this.getName(),
                         this.getAge(),
                         student.getName()):
-                String.format("My name is %s. I am %d years old. I am a Teacher. I don't teach Jerry.",
+                String.format("My name is %s. I am %d years old. I am a Teacher. I don't teach %s.",
                         this.getName(),
-                        this.getAge());
+                        this.getAge(),
+                        student.getName());
     }
 
 }
