@@ -1,6 +1,5 @@
 package practice07;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
