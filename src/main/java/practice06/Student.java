@@ -6,8 +6,6 @@ public class Student extends Person {
     public Student(String name, int age) {
         super(name, age);
     }
-    public Student() {
-    }
     public Student(String name, int age,Klass klass) {
         super(name, age);
         this.klass = klass;
@@ -23,9 +21,7 @@ public class Student extends Person {
 
     @Override
     public String introduce() {
-        return String.format("My name is %s. I am %d years old. I am a Student. I am at %s.",
-                this.getName(),
-                this.getAge(),
+        return super.introduce() +  String.format(" I am a Student. I am at %s.",
                 klass.getDisplayName());
     }
 }
