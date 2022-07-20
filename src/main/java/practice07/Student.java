@@ -1,8 +1,14 @@
 package practice07;
 
 
-import org.apache.commons.lang.StringUtils;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Objects;
+@Getter
+@Setter
 public class Student extends Person {
     private Klass klass;
     public Student(String name, int age) {
@@ -19,25 +25,27 @@ public class Student extends Person {
         this.klass = klass;
     }
 
-    public Klass getKlass() {
-        return klass;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Student student = (Student) o;
+        return super.equals((Person) o) && Objects.equals(klass, student.klass);
     }
 
-    public void setKlass(Klass klass) {
-        this.klass = klass;
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), klass);
     }
 
     @Override
     public String introduce() {
         //My name is Tom. I am 21 years old. I am a Student. I am Leader of Class 2.
-        return this.getKlass().getLeader()==null?
-                String.format("My name is %s. I am %d years old. I am a Student. I am at %s.",
-                        this.getName(),
-                        this.getAge(),
-                        klass.getDisplayName()):
-                String.format("My name is %s. I am %d years old. I am a Student. I am Leader of %s.",
-                        this.getName(),
-                        this.getAge(),
+        return !this.equals(this.getKlass().getLeader()) ?
+                super.introduce() + String.format(" I am a Student. I am at %s.",
+                        klass.getDisplayName()) :
+                super.introduce() + String.format(" I am a Student. I am Leader of %s.",
                         klass.getDisplayName());
     }
 }

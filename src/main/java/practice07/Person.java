@@ -1,13 +1,21 @@
 package practice07;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import java.util.Objects;
+
+@Setter
+@Getter
 public class Person {
     private int id;
     private String name;
     private int age;
-    public Person() {}
+    /**
+     * Lombok needs a default constructor in the base class
+     */
+    public Person() { }
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
@@ -18,12 +26,19 @@ public class Person {
         this.age = age;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id == person.id &&
+                age == person.age &&
+                Objects.equals(name, person.name);
     }
 
-    public int getAge() {
-        return age;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, age);
     }
 
     public String introduce() {

@@ -3,9 +3,13 @@ package practice07;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+import java.util.Objects;
+
+@Getter
+@Setter
 public class Klass {
     private int number;
 
@@ -21,5 +25,17 @@ public class Klass {
 
     public void assignLeader(Student student) {
         this.leader = student;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Klass klass = (Klass) o;
+        return number == klass.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

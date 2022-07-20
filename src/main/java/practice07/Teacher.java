@@ -26,25 +26,17 @@ public class Teacher extends Person {
 
     @Override
     public String introduce() {
-        return this.getKlass()!=null ?
-                String.format("My name is %s. I am %d years old. I am a Teacher. I teach Class %d.",
-                        this.getName(),
-                        this.getAge(),
-                        this.getKlass().getNumber()):
-                String.format("My name is %s. I am %d years old. I am a Teacher. I teach No Class.",
-                        this.getName(),
-                        this.getAge());
+        return this.getKlass() != null ?
+                super.introduce() + String.format(" I am a Teacher. I teach Class %d.",
+                        this.getKlass().getNumber()) :
+                super.introduce() + " I am a Teacher. I teach No Class.";
     }
 
     public String introduceWith(Student student) {
-        return this.getKlass().getNumber() == student.getKlass().getNumber()?
-                String.format("My name is %s. I am %d years old. I am a Teacher. I teach %s.",
-                        this.getName(),
-                        this.getAge(),
-                        student.getName()):
-                String.format("My name is %s. I am %d years old. I am a Teacher. I don't teach %s.",
-                        this.getName(),
-                        this.getAge(),
+        return this.getKlass().equals(student.getKlass()) ?
+                super.introduce() + String.format(" I am a Teacher. I teach %s.",
+                        student.getName()) :
+                super.introduce() + String.format(" I am a Teacher. I don't teach %s.",
                         student.getName());
     }
 
